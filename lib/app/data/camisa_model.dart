@@ -1,5 +1,4 @@
 class CamisaModel {
-  final double precoBase;
   final double valorPresente;
   final int maxParcelas;
   final double jurosPorParcela;
@@ -7,7 +6,6 @@ class CamisaModel {
   final List<ModeloCamisa> modelos;
 
   CamisaModel({
-    required this.precoBase,
     required this.valorPresente,
     required this.maxParcelas,
     required this.jurosPorParcela,
@@ -17,7 +15,6 @@ class CamisaModel {
 
   factory CamisaModel.fromMap(Map<String, dynamic> map) {
     return CamisaModel(
-      precoBase: map['precoBase'] ?? 0.0,
       valorPresente: map['valorPresente'] ?? 0.0,
       maxParcelas: map['maxParcelas'] ?? 1,
       jurosPorParcela: map['jurosPorParcela'] ?? 0.0,
@@ -34,28 +31,31 @@ class CamisaModel {
 
   @override
   String toString() {
-    return 'CamisaModel(precoBase: $precoBase, valorPresente: $valorPresente, maxParcelas: $maxParcelas, jurosPorParcela: $jurosPorParcela, tamanhosDisponiveis: $tamanhosDisponiveis, modelos: $modelos)';
+    return 'CamisaModel(valorPresente: $valorPresente, maxParcelas: $maxParcelas, jurosPorParcela: $jurosPorParcela, tamanhosDisponiveis: $tamanhosDisponiveis, modelos: $modelos)';
   }
 }
 
 class ModeloCamisa {
   final String cor;
+  final double preco;
   final String imagePath;
 
   ModeloCamisa({
     required this.cor,
+    required this.preco,
     required this.imagePath,
   });
 
   factory ModeloCamisa.fromMap(Map<String, dynamic> map) {
     return ModeloCamisa(
       cor: map['cor'] ?? '',
+      preco: map['preco'] ?? 0.0,
       imagePath: map['imagePath'] ?? '',
     );
   }
 
   @override
   String toString() {
-    return 'ModeloCamisa(cor: $cor, imagePath: $imagePath)';
+    return 'ModeloCamisa(cor: $cor, preco: $preco, imagePath: $imagePath)';
   }
 }

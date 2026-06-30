@@ -17,8 +17,18 @@ class CompraModel {
     required this.parcelas,
   });
 
+  ModeloCamisa get modeloSelecionado {
+    return camisa.modelos.firstWhere(
+      (modelo) => modelo.cor == cor,
+    );
+  }
+
+  double get precoUnitario {
+    return modeloSelecionado.preco;
+  }
+
   double get subtotalProdutos {
-    return camisa.precoBase * quantidade;
+    return precoUnitario * quantidade;
   }
 
   double get valorEmbrulho {
@@ -49,6 +59,14 @@ class CompraModel {
     return total / parcelas;
   }
 
+  String get descricaoPresente {
+    if (embrulharParaPresente) {
+      return 'Sim';
+    }
+
+    return 'Não';
+  }
+
   @override
   String toString() {
     return '''
@@ -58,6 +76,7 @@ CompraModel(
   quantidade: $quantidade,
   embrulharParaPresente: $embrulharParaPresente,
   parcelas: $parcelas,
+  precoUnitario: R\$ ${precoUnitario.toStringAsFixed(2)},
   subtotalProdutos: R\$ ${subtotalProdutos.toStringAsFixed(2)},
   valorEmbrulho: R\$ ${valorEmbrulho.toStringAsFixed(2)},
   valorJuros: R\$ ${valorJuros.toStringAsFixed(2)},
